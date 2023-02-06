@@ -21,7 +21,7 @@ public class SeckillMsgPoolFactory {
 
     public SeckillMsgPool getSeckillMsgPool(Long goodsId){
         if(!factory.containsKey(goodsId)){
-            synchronized (SeckillMsgPoolFactory.class){ // 如果只通过 bean 单例执行，那么可以用 this 加锁
+            synchronized (this){ // 由一个 factory bean单例统一生产
                 if(!factory.containsKey(goodsId)){
                     factory.put(goodsId, new SeckillMsgPool());
                     log.info("为商品："+goodsId+" 创建合并队列并开启消费者线程");
